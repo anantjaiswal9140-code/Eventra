@@ -1,0 +1,26 @@
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
