@@ -1,26 +1,47 @@
 .card {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: 0.3s;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 4px 0;
+  color: #666;
+  font-size: 14px;
 }
 
 .btn {
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 10px;
+  width: 100%;
   border: none;
+  border-radius: 8px;
   background: #007bff;
   color: white;
-  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .btn:hover {
   background: #0056b3;
+}
+
+/* Registered state */
+.btn.registered {
+  background: #e0e0e0;
+  color: #555;
+  cursor: not-allowed;
 }
