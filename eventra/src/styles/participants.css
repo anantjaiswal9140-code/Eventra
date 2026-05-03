@@ -1,0 +1,24 @@
+.participants {
+  padding: 40px;
+}
+
+.event-block {
+  margin-bottom: 30px;
+}
+
+.event-block h2 {
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.empty {
+  color: #777;
+}

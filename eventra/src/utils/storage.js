@@ -1,11 +1,9 @@
 // ================= EVENTS =================
 
-// Get all events
 export const getEvents = () => {
   return JSON.parse(localStorage.getItem("events")) || [];
 };
 
-// Save new event
 export const saveEvent = (event) => {
   const events = getEvents();
   events.push(event);
@@ -14,24 +12,26 @@ export const saveEvent = (event) => {
 
 // ================= REGISTRATIONS =================
 
-// Get registrations
 export const getRegistrations = () => {
   return JSON.parse(localStorage.getItem("registrations")) || {};
 };
 
-// Register for event
-export const registerEvent = (eventId) => {
+export const saveRegistration = (eventId, userData) => {
   const registrations = getRegistrations();
 
   if (!registrations[eventId]) {
-    registrations[eventId] = true;
+    registrations[eventId] = [];
   }
+
+  registrations[eventId].push(userData);
 
   localStorage.setItem("registrations", JSON.stringify(registrations));
 };
 
-// Check if registered
-export const isRegistered = (eventId) => {
+export const isRegistered = (eventId, email) => {
   const registrations = getRegistrations();
-  return registrations[eventId] || false;
+
+  if (!registrations[eventId]) return false;
+
+  return registrations[eventId].some((user) => user.email === email);
 };

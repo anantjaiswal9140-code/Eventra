@@ -1,43 +1,37 @@
 .hero {
+  padding: 60px 20px;
   text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  color: white;
+  background: white;
+  border-bottom: 1px solid #eee;
 }
 
 .hero h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  margin-bottom: 8px;
 }
 
 .hero p {
-  font-size: 18px;
+  color: #666;
 }
 
-/* SEARCH BAR */
+/* Search */
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  margin: 25px 0;
 }
 
 .search-container input {
-  width: 300px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
+  width: 320px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
 }
 
-/* GRID */
+/* Grid */
 .event-grid {
+  padding: 30px 40px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  padding: 40px;
-}
-
-.empty {
-  text-align: center;
-  font-size: 18px;
+  gap: 20px;
 }

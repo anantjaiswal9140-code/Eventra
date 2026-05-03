@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { getEvents } from "../utils/storage";
+import { useState } from "react";
+import { getEvents, saveRegistration } from "../utils/storage";
 import "../styles/details.css";
 
 function EventDetails() {
@@ -8,9 +9,31 @@ function EventDetails() {
 
   const event = events.find((e) => e.id.toString() === id);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    enrollment: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
   if (!event) {
     return <p style={{ textAlign: "center" }}>Event not found</p>;
   }
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    saveRegistration(event.id, formData);
+    setSubmitted(true);
+  };
 
   return (
     <div className="details-container">
@@ -18,7 +41,40 @@ function EventDetails() {
       <p className="date">{event.date}</p>
       <p className="location">{event.location}</p>
 
-      <button className="details-btn">Register</button>
+      {!submitted ? (
+        <form className="form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="enrollment"
+            placeholder="Enrollment Number"
+            value={formData.enrollment}
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit">Register</button>
+        </form>
+      ) : (
+        <p className="success">Registration completed</p>
+      )}
     </div>
   );
 }

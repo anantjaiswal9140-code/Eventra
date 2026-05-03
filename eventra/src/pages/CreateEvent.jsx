@@ -1,54 +1,85 @@
-import { useState,React } from "react";
+import { useState } from "react";
 import { saveEvent } from "../utils/storage";
 import "../styles/create.css";
 
 function CreateEvent() {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
+  const [form, setForm] = useState({
+    title: "",
+    date: "",
+    location: "",
+  });
+
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newEvent = {
       id: Date.now(),
-      title,
-      date,
-      location,
+      ...form,
     };
 
     saveEvent(newEvent);
 
-    alert("Event Created Successfully 🚀");
+    // Show success message
+    setSuccess(true);
 
-    setTitle("");
-    setDate("");
-    setLocation("");
+    // Reset form
+    setForm({
+      title: "",
+      date: "",
+      location: "",
+    });
+
+    // Hide after 2 seconds
+    setTimeout(() => {
+      setSuccess(false);
+    }, 2000);
   };
 
   return (
-    <div className="form-container">
-      <h2>Create Event</h2>
+    <div className="create-container">
+      <h1>Create Event</h1>
+
+      {/* Success Message */}
+      {success && (
+        <div className="success-popup">
+          Event created successfully
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          name="title"
           placeholder="Event Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={form.title}
+          onChange={handleChange}
+          required
         />
 
         <input
           type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          name="date"
+          value={form.date}
+          onChange={handleChange}
+          required
         />
 
         <input
           type="text"
+          name="location"
           placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={form.location}
+          onChange={handleChange}
+          required
         />
 
         <button type="submit">Create Event</button>

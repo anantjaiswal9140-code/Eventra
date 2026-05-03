@@ -2,24 +2,38 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 16px 40px;
   background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #eee;
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 600;
   color: #007bff;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
   margin-left: 20px;
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+  font-size: 14px;
 }
 
 .nav-links a:hover {
   color: #007bff;
+}
+
+.switch-btn {
+  margin-left: 20px;
+  padding: 6px 12px;
+  border: none;
+  background: #f0f0f0;
+  border-radius: 6px;
+  cursor: pointer;
 }

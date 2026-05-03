@@ -1,14 +1,30 @@
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
-function Navbar() {
+function Navbar({ role }) {
+  const switchRole = () => {
+    localStorage.removeItem("role");
+    window.location.reload();
+  };
+
   return (
     <nav className="navbar">
       <h2 className="logo">Eventra</h2>
 
       <div className="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Create</a>
-        <a href="#">Dashboard</a>
+        <Link to="/">Home</Link>
+
+        {role === "organizer" && (
+          <>
+            <Link to="/create">Create</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/participants">Participants</Link>
+          </>
+        )}
+
+        <button className="switch-btn" onClick={switchRole}>
+          Switch Role
+        </button>
       </div>
     </nav>
   );
