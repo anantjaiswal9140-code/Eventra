@@ -1,22 +1,17 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import CreateEvent from "./pages/CreateEvent";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
-  const [page, setPage] = useState("home");
-
   return (
     <div>
       <Navbar />
 
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <button onClick={() => setPage("home")}>Home</button>
-        <button onClick={() => setPage("create")}>Create</button>
-      </div>
-
-      {page === "home" && <Home />}
-      {page === "create" && <CreateEvent />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/event/:id" element={<EventDetails />} />
+      </Routes>
     </div>
   );
 }
