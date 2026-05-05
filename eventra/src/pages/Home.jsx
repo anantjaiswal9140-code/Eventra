@@ -5,41 +5,35 @@ import "../styles/home.css";
 
 function Home() {
   const [events, setEvents] = useState([]);
-  const [search, setSearch] = useState("");
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
     setEvents(getEvents());
   }, []);
 
-  // Filter logic
-  const filteredEvents = events.filter((event) =>
-    event.title.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <div>
       {/* HERO */}
       <div className="hero">
-        <h1>Discover Amazing Events</h1>
-        <p>Create, manage and explore events easily</p>
-      </div>
-
-      {/* SEARCH BAR */}
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search events..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        {role === "organizer" ? (
+          <>
+            <h1>Manage Your Events</h1>
+            <p>Create events and track participants</p>
+          </>
+        ) : (
+          <>
+            <h1>Explore Events</h1>
+            <p>Find and register for events</p>
+          </>
+        )}
       </div>
 
       {/* GRID */}
       <div className="event-grid">
-        {filteredEvents.length === 0 ? (
-          <p className="empty">No matching events found 🚀</p>
+        {events.length === 0 ? (
+          <p>No events available</p>
         ) : (
-          filteredEvents.map((event) => (
+          events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))
         )}

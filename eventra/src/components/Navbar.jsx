@@ -9,21 +9,27 @@ function Navbar({ role }) {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">Eventra</h2>
+      <h2 className="logo">
+        {role === "organizer" ? "Organizer Panel" : "Eventra"}
+      </h2>
 
       <div className="nav-links">
         <Link to="/">Home</Link>
 
-        {role === "organizer" && (
+        {role === "organizer" ? (
           <>
-            <Link to="/create">Create</Link>
+            <Link to="/create">Create Event</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/participants">Participants</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/">Explore</Link>
           </>
         )}
 
         <button className="switch-btn" onClick={switchRole}>
-          Switch Role
+          Switch
         </button>
       </div>
     </nav>

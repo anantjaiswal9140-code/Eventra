@@ -35,3 +35,18 @@
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* Organizer tone */
+body[data-role="organizer"] .hero {
+  background: #f0f4ff;
+}
+
+/* Participant tone */
+body[data-role="participant"] .hero {
+  background: #f9f9f9;
+}

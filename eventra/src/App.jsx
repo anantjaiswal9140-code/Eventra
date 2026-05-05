@@ -1,5 +1,9 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+
 import Home from "./pages/Home";
 import EventDetails from "./pages/EventDetails";
 import Dashboard from "./pages/Dashboard";
@@ -10,29 +14,43 @@ import RoleSelect from "./pages/RoleSelect";
 function App() {
   const role = localStorage.getItem("role");
 
-  // If no role selected → show selection screen
+  useEffect(() => {
+    if (role) {
+      document.body.setAttribute("data-role", role);
+    }
+  }, [role]);
+
   if (!role) {
     return <RoleSelect />;
   }
 
   return (
-    <div>
-      <Navbar role={role} />
+    <div style={{ display: "flex" }}>
+      {/* Organizer → Sidebar */}
+      {role === "organizer" && <Sidebar />}
 
-      <Routes>
-        {/* Shared */}
-        <Route path="/" element={<Home />} />
-        <Route path="/event/:id" element={<EventDetails />} />
+      <div
+        style={{
+          flex: 1,
+          marginLeft: role === "organizer" ? "220px" : "0",
+        }}
+      >
+        {/* Participant → Navbar */}
+        {role === "participant" && <Navbar role={role} />}
 
-        {/* Organizer only */}
-        {role === "organizer" && (
-          <>
-            <Route path="/create" element={<CreateEvent />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/participants" element={<Participants />} />
-          </>
-        )}
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/event/:id" element={<EventDetails />} />
+
+          {role === "organizer" && (
+            <>
+              <Route path="/create" element={<CreateEvent />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/participants" element={<Participants />} />
+            </>
+          )}
+        </Routes>
+      </div>
     </div>
   );
 }
