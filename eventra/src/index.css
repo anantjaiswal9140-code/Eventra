@@ -1,8 +1,13 @@
-body {
+/* Full height layout */
+html, body, #root {
+  height: 100%;
   margin: 0;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background: #f4f6f8;
-  color: #222;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f3f4f6;
+  color: #111;
 }
 
 * {

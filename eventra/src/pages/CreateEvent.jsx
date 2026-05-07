@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import { saveEvent } from "../utils/storage";
+
 import "../styles/create.css";
 
 function CreateEvent() {
@@ -7,6 +9,8 @@ function CreateEvent() {
     title: "",
     date: "",
     location: "",
+    category: "",
+    description: "",
   });
 
   const [success, setSuccess] = useState(false);
@@ -28,62 +32,135 @@ function CreateEvent() {
 
     saveEvent(newEvent);
 
-    // Show success message
+    /* SUCCESS MESSAGE */
     setSuccess(true);
 
-    // Reset form
+    setTimeout(() => {
+      setSuccess(false);
+    }, 2500);
+
+    /* RESET */
     setForm({
       title: "",
       date: "",
       location: "",
+      category: "",
+      description: "",
     });
-
-    // Hide after 2 seconds
-    setTimeout(() => {
-      setSuccess(false);
-    }, 2000);
   };
 
   return (
-    <div className="create-container">
-      <h1>Create Event</h1>
+    <div className="create-page">
+      {/* HEADER */}
+      <div className="create-header">
+        <h1>Create New Event</h1>
 
-      {/* Success Message */}
+        <p>
+          Manage and publish your college events
+        </p>
+      </div>
+
+      {/* SUCCESS */}
       {success && (
         <div className="success-popup">
           Event created successfully
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Event Title"
-          value={form.title}
-          onChange={handleChange}
-          required
-        />
+      {/* FORM */}
+      <div className="create-card">
+        <form onSubmit={handleSubmit}>
+          {/* TITLE */}
+          <div className="form-group">
+            <label>Event Title</label>
 
-        <input
-          type="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          required
-        />
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter event title"
+              value={form.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={form.location}
-          onChange={handleChange}
-          required
-        />
+          {/* DATE */}
+          <div className="form-group">
+            <label>Date</label>
 
-        <button type="submit">Create Event</button>
-      </form>
+            <input
+              type="date"
+              name="date"
+              value={form.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* LOCATION */}
+          <div className="form-group">
+            <label>Location</label>
+
+            <input
+              type="text"
+              name="location"
+              placeholder="Enter location"
+              value={form.location}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* CATEGORY */}
+          <div className="form-group">
+            <label>Category</label>
+
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select category</option>
+
+              <option value="Technical">
+                Technical
+              </option>
+
+              <option value="Cultural">
+                Cultural
+              </option>
+
+              <option value="Sports">
+                Sports
+              </option>
+
+              <option value="Workshop">
+                Workshop
+              </option>
+            </select>
+          </div>
+
+          {/* DESCRIPTION */}
+          <div className="form-group">
+            <label>Description</label>
+
+            <textarea
+              name="description"
+              placeholder="Write event details..."
+              rows="5"
+              value={form.description}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+          {/* BUTTON */}
+          <button type="submit">
+            Publish Event
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

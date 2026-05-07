@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../utils/storage";
 import EventCard from "../components/EventCard";
+import { Link } from "react-router-dom";
 import "../styles/home.css";
 
 function Home() {
@@ -18,7 +19,12 @@ function Home() {
         {role === "organizer" ? (
           <>
             <h1>Manage Your Events</h1>
-            <p>Create events and track participants</p>
+            <p>Create and monitor your events</p>
+
+            {/* NEW BUTTON */}
+            <Link to="/create" className="primary-btn">
+              + Create New Event
+            </Link>
           </>
         ) : (
           <>
@@ -28,7 +34,7 @@ function Home() {
         )}
       </div>
 
-      {/* GRID */}
+      {/* EVENTS */}
       <div className="event-grid">
         {events.length === 0 ? (
           <p>No events available</p>

@@ -1,52 +1,70 @@
+/* ================= HERO ================= */
+
 .hero {
-  padding: 60px 20px;
+  padding: 40px 20px 25px;
   text-align: center;
-  background: white;
-  border-bottom: 1px solid #eee;
 }
 
-.hero h1 {
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-
-.hero p {
-  color: #666;
-}
-
-/* Search */
-.search-container {
-  display: flex;
-  justify-content: center;
-  margin: 25px 0;
-}
-
-.search-container input {
-  width: 320px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-}
-
-/* Grid */
-.event-grid {
-  padding: 30px 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-}
-
-/* Organizer tone */
-body[data-role="organizer"] .hero {
-  background: #f0f4ff;
-}
-
-/* Participant tone */
+/* PARTICIPANT HERO */
 body[data-role="participant"] .hero {
-  background: #f9f9f9;
+  background: transparent;
+}
+
+/* ORGANIZER HERO */
+body[data-role="organizer"] .hero {
+  background: #eef4ff;
+  border-bottom: 1px solid #dbeafe;
+}
+
+/* Heading */
+.hero h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Subtitle */
+.hero p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ================= CREATE BUTTON ================= */
+
+.primary-btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 18px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ================= EVENT GRID ================= */
+
+/* PARTICIPANT GRID */
+body[data-role="participant"] .event-grid {
+  padding: 35px 70px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+/* ORGANIZER GRID */
+body[data-role="organizer"] .event-grid {
+  padding: 35px 70px 50px;
+  display: grid;
+
+  /* IMPORTANT FIX */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 24px;
 }

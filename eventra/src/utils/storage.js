@@ -1,37 +1,59 @@
-// ================= EVENTS =================
+const EVENT_KEY = "events";
+const REG_KEY = "registrations";
+
+/* ================= EVENTS ================= */
 
 export const getEvents = () => {
-  return JSON.parse(localStorage.getItem("events")) || [];
+  const data = JSON.parse(localStorage.getItem(EVENT_KEY));
+  return Array.isArray(data) ? data : [];
 };
 
 export const saveEvent = (event) => {
   const events = getEvents();
+
   events.push(event);
-  localStorage.setItem("events", JSON.stringify(events));
+
+  localStorage.setItem(EVENT_KEY, JSON.stringify(events));
 };
 
-// ================= REGISTRATIONS =================
+export const deleteEvent = (eventId) => {
+  const events = getEvents().filter(
+    (e) => String(e.id) !== String(eventId)
+  );
+
+  localStorage.setItem(EVENT_KEY, JSON.stringify(events));
+
+  /* ALSO DELETE REGISTRATIONS */
+  const regs = getRegistrations().filter(
+    (r) => String(r.eventId) !== String(eventId)
+  );
+
+  localStorage.setItem(REG_KEY, JSON.stringify(regs));
+};
+
+/* ================= REGISTRATIONS ================= */
 
 export const getRegistrations = () => {
-  return JSON.parse(localStorage.getItem("registrations")) || {};
+  const data = JSON.parse(localStorage.getItem(REG_KEY));
+  return Array.isArray(data) ? data : [];
 };
 
-export const saveRegistration = (eventId, userData) => {
-  const registrations = getRegistrations();
+export const saveRegistration = (registration) => {
+  const regs = getRegistrations();
 
-  if (!registrations[eventId]) {
-    registrations[eventId] = [];
-  }
+  regs.push(registration);
 
-  registrations[eventId].push(userData);
-
-  localStorage.setItem("registrations", JSON.stringify(registrations));
+  localStorage.setItem(REG_KEY, JSON.stringify(regs));
 };
 
-export const isRegistered = (eventId, email) => {
-  const registrations = getRegistrations();
+/* ================= DASHBOARD HELPERS ================= */
 
-  if (!registrations[eventId]) return false;
+export const getTotalRegistrations = () => {
+  return getRegistrations().length;
+};
 
-  return registrations[eventId].some((user) => user.email === email);
+export const getRegistrationsByEvent = (eventId) => {
+  return getRegistrations().filter(
+    (r) => String(r.eventId) === String(eventId)
+  );
 };

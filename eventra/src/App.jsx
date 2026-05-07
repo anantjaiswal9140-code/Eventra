@@ -1,8 +1,12 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import EventDetails from "./pages/EventDetails";
@@ -25,23 +29,22 @@ function App() {
   }
 
   return (
-    <div style={{ display: "flex" }}>
-      {/* Organizer → Sidebar */}
-      {role === "organizer" && <Sidebar />}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Navbar role={role} />
 
-      <div
-        style={{
-          flex: 1,
-          marginLeft: role === "organizer" ? "220px" : "0",
-        }}
-      >
-        {/* Participant → Navbar */}
-        {role === "participant" && <Navbar role={role} />}
-
+      <div style={{ flex: 1 }}>
         <Routes>
+          {/* COMMON */}
           <Route path="/" element={<Home />} />
           <Route path="/event/:id" element={<EventDetails />} />
 
+          {/* ORGANIZER ONLY */}
           {role === "organizer" && (
             <>
               <Route path="/create" element={<CreateEvent />} />
@@ -49,8 +52,13 @@ function App() {
               <Route path="/participants" element={<Participants />} />
             </>
           )}
+
+          {/* FALLBACK */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
+
+      <Footer />
     </div>
   );
 }
