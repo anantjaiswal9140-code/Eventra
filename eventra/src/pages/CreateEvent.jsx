@@ -5,162 +5,174 @@ import { saveEvent } from "../utils/storage";
 import "../styles/create.css";
 
 function CreateEvent() {
-  const [form, setForm] = useState({
-    title: "",
-    date: "",
-    location: "",
-    category: "",
-    description: "",
-  });
+
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
 
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
     const newEvent = {
       id: Date.now(),
-      ...form,
+      title,
+      date,
+      location,
+      category,
+      description,
     };
 
     saveEvent(newEvent);
 
-    /* SUCCESS MESSAGE */
     setSuccess(true);
+
+    setTitle("");
+    setDate("");
+    setLocation("");
+    setCategory("");
+    setDescription("");
 
     setTimeout(() => {
       setSuccess(false);
     }, 2500);
-
-    /* RESET */
-    setForm({
-      title: "",
-      date: "",
-      location: "",
-      category: "",
-      description: "",
-    });
   };
 
   return (
+
     <div className="create-page">
-      {/* HEADER */}
-      <div className="create-header">
+
+      <div className="create-container">
+
         <h1>Create New Event</h1>
 
-        <p>
+        <p className="create-subtitle">
           Manage and publish your college events
         </p>
-      </div>
 
-      {/* SUCCESS */}
-      {success && (
-        <div className="success-popup">
-          Event created successfully
-        </div>
-      )}
+        {success && (
+          <div className="success-popup">
+            Event created successfully
+          </div>
+        )}
 
-      {/* FORM */}
-      <div className="create-card">
-        <form onSubmit={handleSubmit}>
+        <form
+          className="create-form"
+          onSubmit={handleSubmit}
+        >
+
           {/* TITLE */}
-          <div className="form-group">
+          <div>
+
             <label>Event Title</label>
 
             <input
               type="text"
-              name="title"
               placeholder="Enter event title"
-              value={form.title}
-              onChange={handleChange}
+              value={title}
+              onChange={(e) =>
+                setTitle(e.target.value)
+              }
               required
             />
+
           </div>
 
           {/* DATE */}
-          <div className="form-group">
+          <div>
+
             <label>Date</label>
 
             <input
               type="date"
-              name="date"
-              value={form.date}
-              onChange={handleChange}
+              value={date}
+              onChange={(e) =>
+                setDate(e.target.value)
+              }
               required
             />
+
           </div>
 
           {/* LOCATION */}
-          <div className="form-group">
+          <div>
+
             <label>Location</label>
 
             <input
               type="text"
-              name="location"
               placeholder="Enter location"
-              value={form.location}
-              onChange={handleChange}
+              value={location}
+              onChange={(e) =>
+                setLocation(e.target.value)
+              }
               required
             />
+
           </div>
 
           {/* CATEGORY */}
-          <div className="form-group">
+          <div>
+
             <label>Category</label>
 
             <select
-              name="category"
-              value={form.category}
-              onChange={handleChange}
+              value={category}
+              onChange={(e) =>
+                setCategory(e.target.value)
+              }
               required
             >
-              <option value="">Select category</option>
-
-              <option value="Technical">
-                Technical
+              <option value="">
+                Select category
               </option>
 
-              <option value="Cultural">
-                Cultural
+              <option value="Tech">
+                Tech
               </option>
 
               <option value="Sports">
                 Sports
               </option>
 
-              <option value="Workshop">
-                Workshop
+              <option value="Cultural">
+                Cultural
               </option>
+
             </select>
+
           </div>
 
           {/* DESCRIPTION */}
-          <div className="form-group">
+          <div>
+
             <label>Description</label>
 
             <textarea
-              name="description"
               placeholder="Write event details..."
-              rows="5"
-              value={form.description}
-              onChange={handleChange}
-              required
-            ></textarea>
+              value={description}
+              onChange={(e) =>
+                setDescription(e.target.value)
+              }
+            />
+
           </div>
 
-          {/* BUTTON */}
-          <button type="submit">
+          <button
+            type="submit"
+            className="publish-btn"
+          >
             Publish Event
           </button>
+
         </form>
+
       </div>
+
     </div>
   );
 }

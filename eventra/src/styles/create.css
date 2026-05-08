@@ -1,36 +1,101 @@
-.create-container {
-  max-width: 480px;
-  margin: 50px auto;
-  padding: 20px;
+/* PAGE */
+.create-page {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
 }
 
+/* CARD */
+.create-container {
+  width: 100%;
+  max-width: 650px;
+
+  background: rgba(255,255,255,0.95);
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  padding: 32px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.04);
+}
+
+/* Heading */
 .create-container h1 {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  font-size: 32px;
+}
+
+.create-subtitle {
+  color: #6b7280;
+  margin-bottom: 28px;
+  font-size: 14px;
 }
 
 /* Form */
-form {
+.create-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 18px;
 }
 
-input {
-  padding: 10px;
+/* Label */
+.create-form label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
 
-  border-radius: 7px;
+/* Inputs */
+.create-form input,
+.create-form select,
+.create-form textarea {
+
+  width: 100%;
+
+  padding: 12px 14px;
 
   border: 1px solid #d1d5db;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  background: white;
+
+  transition: 0.2s;
 }
 
-input:focus {
-  border-color: #111827;
+/* Focus */
+.create-form input:focus,
+.create-form select:focus,
+.create-form textarea:focus {
+
   outline: none;
+
+  border-color: #111827;
+
+  box-shadow:
+    0 0 0 3px rgba(17,24,39,0.08);
+}
+
+/* Textarea */
+.create-form textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 /* Button */
-button {
-  padding: 10px;
+.publish-btn {
+
+  margin-top: 10px;
+
+  width: 100%;
+
+  padding: 13px;
 
   background: #111827;
 
@@ -38,26 +103,46 @@ button {
 
   border: none;
 
-  border-radius: 7px;
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  font-weight: 500;
 
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
-button:hover {
+.publish-btn:hover {
   background: #374151;
 }
 
 /* Success popup */
 .success-popup {
-  margin-bottom: 10px;
 
-  padding: 10px;
+  margin-bottom: 18px;
+
+  padding: 12px;
+
+  border-radius: 10px;
 
   background: #f3f4f6;
 
   color: #111827;
 
-  border-radius: 7px;
+  font-size: 14px;
+}
 
-  font-size: 13px;
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .create-container {
+    padding: 22px;
+  }
+
+  .create-container h1 {
+    font-size: 26px;
+  }
+
 }

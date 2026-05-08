@@ -5,11 +5,14 @@ const REG_KEY = "registrations";
 
 // Get all events
 export const getEvents = () => {
-  return JSON.parse(localStorage.getItem(EVENT_KEY)) || [];
+  return JSON.parse(
+    localStorage.getItem(EVENT_KEY)
+  ) || [];
 };
 
-// Save new event
+// Save event
 export const saveEvent = (event) => {
+
   const events = getEvents();
 
   events.push(event);
@@ -20,12 +23,12 @@ export const saveEvent = (event) => {
   );
 };
 
-// Delete event
+// Delete event + related registrations
 export const deleteEvent = (id) => {
 
-  // Remove selected event
+  // Remove event
   const updatedEvents = getEvents().filter(
-    (event) => event.id !== id
+    (event) => event.id != id
   );
 
   localStorage.setItem(
@@ -33,9 +36,9 @@ export const deleteEvent = (id) => {
     JSON.stringify(updatedEvents)
   );
 
-  // ALSO remove registrations of deleted event
+  // Remove registrations of deleted event
   const updatedRegs = getRegistrations().filter(
-    (reg) => reg.eventId !== id
+    (reg) => reg.eventId != id
   );
 
   localStorage.setItem(
@@ -46,9 +49,12 @@ export const deleteEvent = (id) => {
 
 /* ================= REGISTRATIONS ================= */
 
-// Get all registrations
+// Get registrations
 export const getRegistrations = () => {
-  return JSON.parse(localStorage.getItem(REG_KEY)) || [];
+
+  return JSON.parse(
+    localStorage.getItem(REG_KEY)
+  ) || [];
 };
 
 // Save registration
@@ -64,13 +70,16 @@ export const saveRegistration = (registration) => {
   );
 };
 
-// Total registrations count
+// Total registrations
 export const getTotalRegistrations = () => {
+
   return getRegistrations().length;
 };
 
-// Registrations for specific event
-export const getRegistrationsByEvent = (eventId) => {
+// Registrations by event
+export const getRegistrationsByEvent = (
+  eventId
+) => {
 
   return getRegistrations().filter(
     (reg) => reg.eventId == eventId
