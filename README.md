@@ -60,7 +60,7 @@ Eventra provides a *centralized platform* where all event-related information is
 ## ⚙️ Installation & Setup
 
 1.⁠ ⁠Clone the repository:
-   git clone https://github.com/your-username/campusconnect.git
+   git clone https://github.com/your-username/eventra.git
 
 2.⁠ ⁠Navigate to project folder:
    cd campusconnect
@@ -84,4 +84,7 @@ Eventra provides a *centralized platform* where all event-related information is
 
 ## 🎯 Conclusion
 Eventra aims to simplify event management in colleges by providing a clean, user-friendly interface and a structured workflow for both organizers and participants.
+
+## Vercel link-
+https://eventra-kappa.vercel.app/
 
