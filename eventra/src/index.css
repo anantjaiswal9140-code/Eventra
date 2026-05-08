@@ -1,15 +1,33 @@
-/* Full height layout */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f3f4f6;
+  font-family: "Inter", sans-serif;
+
+  /* PREMIUM BACKGROUND */
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.08),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at top right,
+      rgba(99, 102, 241, 0.06),
+      transparent 25%
+    ),
+
+    #f5f7fb;
+
   color: #111;
 }
 
+/* Smooth rendering */
 * {
   box-sizing: border-box;
 }

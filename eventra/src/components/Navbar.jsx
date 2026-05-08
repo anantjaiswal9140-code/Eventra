@@ -8,9 +8,11 @@ function Navbar({ role }) {
   };
 
   return (
-    <nav className={`navbar ${role}`}>
+    <nav className="navbar">
       <h2 className="logo">
-        {role === "organizer" ? "Organizer Panel" : "Eventra"}
+        {role === "organizer"
+          ? "Organizer Panel"
+          : "Eventra"}
       </h2>
 
       <div className="nav-links">
@@ -24,7 +26,10 @@ function Navbar({ role }) {
           </>
         )}
 
-        <button className="switch-btn" onClick={switchRole}>
+        <button
+          className="switch-btn"
+          onClick={switchRole}
+        >
           Switch Role
         </button>
       </div>

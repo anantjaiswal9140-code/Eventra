@@ -2,15 +2,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 14px 50px;
-  background: #2563eb;
+
+  background: #111827;
+
   color: white;
+
   flex-wrap: wrap;
+
+  border-bottom: 1px solid #1f2937;
 }
 
 /* Logo */
 .logo {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -22,9 +28,9 @@
 }
 
 .nav-links a {
-  font-size: 13px;
+  color: #d1d5db;
   text-decoration: none;
-  color: #e0e7ff;
+  font-size: 13px;
 }
 
 .nav-links a:hover {
@@ -33,30 +39,30 @@
 
 /* Switch button */
 .switch-btn {
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 7px 14px;
+
   border: none;
-  background: rgba(255,255,255,0.15);
+
+  border-radius: 7px;
+
+  background: #1f2937;
+
   color: white;
+
   cursor: pointer;
 }
 
 .switch-btn:hover {
-  background: rgba(255,255,255,0.25);
+  background: #374151;
 }
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media (max-width: 768px) {
+
   .navbar {
     flex-direction: column;
     gap: 12px;
     padding: 16px 20px;
-    text-align: center;
   }
 
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
 }

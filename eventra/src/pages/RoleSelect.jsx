@@ -1,25 +1,35 @@
-import "../styles/role.css";
+import "../styles/roleselect.css";
 
 function RoleSelect() {
-  const selectRole = (role) => {
+
+  const chooseRole = (role) => {
     localStorage.setItem("role", role);
     window.location.reload();
   };
 
   return (
-    <div className="role-container">
-      <h1>Eventra</h1>
-      <p>Select how you want to continue</p>
+    <div className="role-overlay">
 
-      <div className="role-buttons">
-        <button onClick={() => selectRole("organizer")}>
-          Organizer
-        </button>
+      <div className="role-modal">
 
-        <button onClick={() => selectRole("participant")}>
-          Participant
-        </button>
+        <h1>Welcome to Eventra</h1>
+
+        <p>Select how you want to continue</p>
+
+        <div className="role-buttons">
+
+          <button onClick={() => chooseRole("participant")}>
+            Participant
+          </button>
+
+          <button onClick={() => chooseRole("organizer")}>
+            Organizer
+          </button>
+
+        </div>
+
       </div>
+
     </div>
   );
 }

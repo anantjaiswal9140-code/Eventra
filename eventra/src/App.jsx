@@ -1,9 +1,5 @@
 import { useEffect } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -16,14 +12,18 @@ import CreateEvent from "./pages/CreateEvent";
 import RoleSelect from "./pages/RoleSelect";
 
 function App() {
+
+  // Get saved role
   const role = localStorage.getItem("role");
 
+  // Add role to body
   useEffect(() => {
     if (role) {
       document.body.setAttribute("data-role", role);
     }
   }, [role]);
 
+  // FIRST VISIT → show popup
   if (!role) {
     return <RoleSelect />;
   }
@@ -40,11 +40,9 @@ function App() {
 
       <div style={{ flex: 1 }}>
         <Routes>
-          {/* COMMON */}
           <Route path="/" element={<Home />} />
           <Route path="/event/:id" element={<EventDetails />} />
 
-          {/* ORGANIZER ONLY */}
           {role === "organizer" && (
             <>
               <Route path="/create" element={<CreateEvent />} />
@@ -52,9 +50,6 @@ function App() {
               <Route path="/participants" element={<Participants />} />
             </>
           )}
-
-          {/* FALLBACK */}
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
 

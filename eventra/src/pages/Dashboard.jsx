@@ -2,117 +2,134 @@ import { useEffect, useState } from "react";
 
 import {
   getEvents,
-  getTotalRegistrations,
-  getRegistrationsByEvent,
+  getRegistrations,
   deleteEvent,
 } from "../utils/storage";
 
 import "../styles/dashboard.css";
 
 function Dashboard() {
+
   const [events, setEvents] = useState([]);
-  const [totalRegs, setTotalRegs] = useState(0);
-
-  const loadData = () => {
-    const ev = getEvents();
-
-    setEvents(ev);
-
-    setTotalRegs(getTotalRegistrations());
-  };
+  const [registrations, setRegistrations] = useState([]);
 
   useEffect(() => {
     loadData();
   }, []);
 
-  /* DELETE WITH CONFIRMATION */
+  const loadData = () => {
+
+    setEvents(getEvents());
+
+    setRegistrations(getRegistrations());
+
+  };
+
+  // DELETE EVENT WITH CONFIRMATION
   const handleDelete = (id) => {
+
     const confirmDelete = window.confirm(
-      "Do you really want to delete this event?"
+      "Do you want to delete this event?"
     );
 
-    if (!confirmDelete) return;
+    if (confirmDelete) {
 
-    deleteEvent(id);
+      deleteEvent(id);
 
-    loadData();
+      loadData();
+    }
   };
 
   return (
     <div className="dashboard-container">
+
       <h1>Organizer Dashboard</h1>
 
-      {/* ================= STATS ================= */}
+      {/* STATS */}
       <div className="stats">
+
         <div className="stat-card">
           <h2>{events.length}</h2>
           <p>Total Events</p>
         </div>
 
         <div className="stat-card">
-          <h2>{totalRegs}</h2>
+          <h2>{registrations.length}</h2>
           <p>Total Registrations</p>
         </div>
+
       </div>
 
-      {/* ================= EVENTS ================= */}
-      <div className="dashboard-events">
-        {events.length === 0 ? (
-          <p>No events created yet</p>
-        ) : (
-          events.map((event) => {
-            const regs = getRegistrationsByEvent(event.id);
+      {/* EVENT CARDS */}
+      <div className="dashboard-grid">
 
-            return (
-              <div className="dashboard-card" key={event.id}>
-                {/* EVENT INFO */}
-                <div>
-                  <h3>{event.title}</h3>
+        {events.map((event) => {
 
-                  <p>{event.date}</p>
+          const eventRegs = registrations.filter(
+            (r) => r.eventId == event.id
+          );
 
-                  <p>{event.location}</p>
+          return (
 
-                  <div className="reg-count">
-                    {regs.length} Registrations
-                  </div>
-                </div>
+            <div
+              className="dashboard-card"
+              key={event.id}
+            >
 
-                {/* PARTICIPANTS */}
-                <div className="participants-section">
-                  <h4>Participants</h4>
+              <h2>{event.title}</h2>
 
-                  {regs.length === 0 ? (
-                    <p className="empty-text">
-                      No participants yet
-                    </p>
-                  ) : (
-                    <div className="participant-list">
-                      {regs.map((r, index) => (
-                        <div className="participant-item" key={index}>
-                          <strong>{r.name}</strong>
+              <p>{event.date}</p>
 
-                          <span>{r.email}</span>
+              <p>{event.location}</p>
 
-                          <span>{r.enrollment}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* DELETE BUTTON */}
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(event.id)}
-                >
-                  Delete Event
-                </button>
+              {/* Registration count */}
+              <div className="reg-count">
+                {eventRegs.length} Registrations
               </div>
-            );
-          })
-        )}
+
+              {/* Participants */}
+              <div className="participants-section">
+
+                <h4>Participants</h4>
+
+                {eventRegs.length === 0 ? (
+
+                  <p className="empty-text">
+                    No participants yet
+                  </p>
+
+                ) : (
+
+                  <ul>
+
+                    {eventRegs.map((reg, index) => (
+
+                      <li key={index}>
+                        {reg.name}
+                      </li>
+
+                    ))}
+
+                  </ul>
+
+                )}
+
+              </div>
+
+              {/* DELETE BUTTON */}
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(event.id)}
+              >
+                Delete Event
+              </button>
+
+            </div>
+          );
+        })}
+
       </div>
+
     </div>
   );
 }
