@@ -1,5 +1,5 @@
 .footer {
-  padding: 10px 30px;
+  padding: 10px 20px;
   background: #1c1c1c;
   color: #999;
   font-size: 12px;
@@ -10,4 +10,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
 }

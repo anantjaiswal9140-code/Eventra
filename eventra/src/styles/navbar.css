@@ -5,6 +5,7 @@
   padding: 14px 50px;
   background: #2563eb;
   color: white;
+  flex-wrap: wrap;
 }
 
 /* Logo */
@@ -17,10 +18,10 @@
 .nav-links {
   display: flex;
   align-items: center;
+  gap: 18px;
 }
 
 .nav-links a {
-  margin-left: 22px;
   font-size: 13px;
   text-decoration: none;
   color: #e0e7ff;
@@ -32,7 +33,6 @@
 
 /* Switch button */
 .switch-btn {
-  margin-left: 20px;
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
@@ -43,4 +43,20 @@
 
 .switch-btn:hover {
   background: rgba(255,255,255,0.25);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
 }
